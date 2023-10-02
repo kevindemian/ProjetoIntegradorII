@@ -1,0 +1,198 @@
+@font-face {
+  font-family: 'Teste';
+  src: url('../fonts/funtime.otf');
+}
+
+body {
+  font-family: 'Teste';
+  background: linear-gradient(
+    90deg,
+    rgba(212, 189, 222, 0.5) 0%,
+    rgba(250, 200, 211, 0.5) 100%
+  );
+  color: rgba(137, 16, 52, 0.91);
+}
+
+#cabecalho {
+  margin: 1% 1% 1% 1%;
+  text-align: center;
+  background: linear-gradient(
+    77deg,
+    #fac8d3 0%,
+    #fbf7b9 29%,
+    #d4bdde 83%,
+    #c19963b0 99%
+  );
+
+  z-index: 0;
+}
+
+#cabeca {
+  color: rgba(185, 11, 64, 0.91);
+  font-family: 'teste';
+  font-size: 5em;
+  margin-top: 1%;
+}
+
+#img_margem {
+  width: 200%;
+  margin-left: 30%;
+  margin-top: 60%;
+  position: relative;
+  opacity: 1;
+}
+
+#margem {
+  width: 12%;
+  min-height: 35rem;
+  float: left;
+  z-index: -1;
+}
+
+h1 {
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 2em;
+}
+
+select {
+  border-radius: 5%;
+  height: 2em;
+}
+
+#conteiner {
+  display: flex;
+}
+
+.containerLogin {
+  width: 35%;
+  margin-left: 20%;
+  margin-top: 10%;
+  justify-content: center;
+  align-items: center;
+  color: rgba(137, 16, 52, 0.91);
+  opacity: 0.95;
+}
+
+.login-form {
+  padding: 6%;
+  border: 1px solid #ccc;
+  background: linear-gradient(
+    77deg,
+    #fac8d3 0%,
+    #fbf7b9 29%,
+    #d4bdde 83%,
+    #c19963b0 99%
+  );
+}
+
+#botao {
+  background-color: rgba(137, 16, 52, 0.91);
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bolder;
+  font-size: 1.5em;
+}
+
+.botoes {
+  float: right;
+}
+
+.botoes button {
+  background-color: #c19963;
+}
+
+#estoque_forms {
+  display: flex;
+  width: 70%;
+  margin-left: 10%;
+  margin-top: 3%;
+  border: 1px solid black;
+}
+
+#estoque_forms div {
+  margin-left: 2%;
+}
+
+#div_prod_form_entrada {
+  width: 50%;
+  align-content: center;
+  justify-content: center;
+}
+
+#div_prod_form_saida {
+  width: 50%;
+  align-content: center;
+  justify-content: center;
+}
+
+#conteiner_estoque {
+  display: block;
+  width: 75%;
+  margin-left: 5%;
+}
+
+#pesquisa {
+  align-content: left;
+  justify-content: left;
+  margin-left: 10%;
+  margin-right: 40%;
+  margin-bottom: 2%;
+  width: 70%;
+  border: 1px solid black;
+  border-radius: 5%;
+}
+
+fieldset {
+  padding: 2%;
+}
+
+#field_pesquisa div {
+  width: 70%;
+  align-content: start;
+}
+
+#form_pesquisa {
+  display: flex;
+}
+
+#lista_estoque {
+  width: 70%;
+  align-content: center;
+  justify-content: center;
+  margin-left: 10%;
+}
+
+#tbl_estoque {
+  text-align: center;
+}
+#tbl_estoque th {
+  font-size: 1em;
+  background-color: #d4bdde;
+  color: #c19963;
+}
+#tbl_estoque tb {
+  font-size: 0.7em;
+}
+
+#cadastro_prod input {
+  height: 1.7em;
+}
+
+.btn_togle {
+  width: 7em;
+  margin-left: 10%;
+  color: rgba(137, 16, 52, 0.91);
+  border-color: #c19963;
+}
+.btn_togle:hover {
+  background-color: #c19963;
+}

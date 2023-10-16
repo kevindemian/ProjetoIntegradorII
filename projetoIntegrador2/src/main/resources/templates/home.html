@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+     <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/> 
+     <link rel="stylesheet" th:href="@{/css/style.css}" />  
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+
+    <title>Acesso ao sistma de estoque</title>
+  </head>
+
+  <body>
+    <div id="cabecalho">
+      <h1 id="cabeca">Mundo Miúdo</h1>
+    </div>
+
+    <div id="conteiner">
+      <div id="margem">
+          <img id="img_margem" src="images/LOGO SITE FINAL.png" alt="girafa" />
+          
+      </div>
+      <div class="containerLogin">
+        <div class="login-form">
+          <h1>Login</h1>
+          <form action="main.html" method="post">
+            <input type="text" name="username" placeholder="Username" />
+            <input type="password" name="password" placeholder="Senha" />
+            <input id="botao" type="submit" value="Login" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

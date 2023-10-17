@@ -52,46 +52,59 @@ public class ProdutoControrller {
     ProdutoCompradoService pcs;
 
     @GetMapping("/pesquisaid")
-    public ModelAndView pesquisaPorId(@RequestParam(name = "id", defaultValue = "0") int id) {
+    public ModelAndView pesquisaPorId(@RequestParam(name = "id", defaultValue = "0") int id, HttpServletRequest request) {
+        HttpSession sessao = request.getSession();
+        if (sessao != null && sessao.getAttribute("usuario") != null && sessao.getAttribute("autorizado").equals(true)) {
+            ModelAndView mv = new ModelAndView("main");
+            List<ProdutoEntity> estoque = new ArrayList<>();
 
-        ModelAndView mv = new ModelAndView("main");
-        List<ProdutoEntity> estoque = new ArrayList<>();
+            ProdutoEntity resultado = ps.buscaProdutoPorId(id);
+            if (resultado == null) {
+                resultado = new ProdutoEntity(0, "PRODUTO", "NÃO", "ENCONTRADO", 0);
+            }
+            estoque.add(resultado);
 
-        ProdutoEntity resultado = ps.buscaProdutoPorId(id);
-        if (resultado == null) {
-            resultado = new ProdutoEntity(0, "PRODUTO", "NÃO", "ENCONTRADO", 0);
+            mv.addObject("estoque", estoque);
+
+            return mv;
         }
-        estoque.add(resultado);
 
-        mv.addObject("estoque", estoque);
-
-        return mv;
+        return new ModelAndView("login");
     }
 
     @GetMapping("/pesquisa/produto/")
-    public ProdutoEntity getProdutoId(@RequestParam(name = "id", defaultValue = "0") int id) {
-
-        return ps.buscaProdutoPorId(id);
+    public ProdutoEntity getProdutoId(@RequestParam(name = "id", defaultValue = "0") int id, HttpServletRequest request) {
+HttpSession sessao = request.getSession();
+        if (sessao != null && sessao.getAttribute("usuario") != null && sessao.getAttribute("autorizado").equals(true)) {
+            return ps.buscaProdutoPorId(id);
+        }
+        return null;
     }
 
     @GetMapping("/pesquisanome")
-    public ModelAndView pesquisaPorNome(@RequestParam(name = "nome", defaultValue = "") String nome) {
+    public ModelAndView pesquisaPorNome(@RequestParam(name = "nome", defaultValue = "") String nome, HttpServletRequest request) {
 
-        ModelAndView mv = new ModelAndView("main");
-        List<ProdutoEntity> estoque = ps.buscaPorNome(nome);
-        if (estoque.isEmpty()) {
-            estoque.add(new ProdutoEntity(0, "PRODUTO", "NÃO", "ENCONTRADO", 0));
+        HttpSession sessao = request.getSession();
+        if (sessao != null && sessao.getAttribute("usuario") != null && sessao.getAttribute("autorizado").equals(true)) {
+            ModelAndView mv = new ModelAndView("main");
+            List<ProdutoEntity> estoque = ps.buscaPorNome(nome);
+            if (estoque.isEmpty()) {
+                estoque.add(new ProdutoEntity(0, "PRODUTO", "NÃO", "ENCONTRADO", 0));
+            }
+
+            mv.addObject("estoque", estoque);
+
+            return mv;
         }
-
-        mv.addObject("estoque", estoque);
-
-        return mv;
+        return new ModelAndView("login");
     }
 
     @PostMapping("/saidaproduto")
     public ProdutoVendidoEntity saidaProduto(@RequestParam(name = "id") int id, @RequestBody ProdutoVendidoEntity produtoVendido, HttpServletRequest request) {
 
         HttpSession sessao = request.getSession();
+  
+        if (sessao != null && sessao.getAttribute("usuario") != null && sessao.getAttribute("autorizado").equals(true)) {
 
         ProdutoEntity produto = ps.buscaProdutoPorId(id);
         int quantidadeProduto = produto.getQuantidade() - produtoVendido.getQuantidade_vendida();
@@ -112,14 +125,15 @@ public class ProdutoControrller {
         pvs.salvarProdutoVendido(produtoVendido);
 
         return produtoVendido;
-
+        }
+return null;
     }
 
     @PostMapping("/entradaproduto")
-    public ProdutoCompradoEntity entradaProduto(@RequestParam(name="id")int idFornecedor , @RequestBody ProdutoCompradoEntity produtoComprado, HttpServletRequest request) {
+    public ProdutoCompradoEntity entradaProduto(@RequestParam(name = "id") int idFornecedor, @RequestBody ProdutoCompradoEntity produtoComprado, HttpServletRequest request) {
 
         HttpSession sessao = request.getSession();
-        
+if (sessao != null && sessao.getAttribute("usuario") != null && sessao.getAttribute("autorizado").equals(true)) {
         ProdutoEntity produto = produtoComprado.getProdutoComprado();
         produto.setQuantidade(produto.getQuantidade() + produtoComprado.getQuantidade_comprada());
 
@@ -129,12 +143,14 @@ public class ProdutoControrller {
         CompraEntity compra = new CompraEntity(fornecedor, new Date(), total);
 
         produtoComprado.setCompra(compra);
-        
+
         ps.salvarProduto(produto);
         cs.saveCompra(compra);
         pcs.salvaProdutoComprado(produtoComprado);
 
         return produtoComprado;
+}
+return null;
     }
 
 }

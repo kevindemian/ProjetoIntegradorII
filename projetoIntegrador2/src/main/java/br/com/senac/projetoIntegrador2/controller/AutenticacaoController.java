@@ -54,7 +54,9 @@ public class AutenticacaoController {
     public String excluiSessao(HttpServletRequest request) {
         HttpSession sessao = request.getSession();
         if (sessao != null) {
-            sessao.invalidate();
+            sessao.removeAttribute("usuario");
+            sessao.setAttribute("autorizado", false);
+            
         }
         return ("redirect:/");
     }

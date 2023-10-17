@@ -1,0 +1,1 @@
+CREATE DATABASE mundo_miudo;

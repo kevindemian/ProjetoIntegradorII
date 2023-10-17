@@ -63,6 +63,10 @@ input {
   height: 2em;
 }
 
+input:invalid {
+  box-shadow: 0 0 5px 1px red;
+}
+
 select {
   border-radius: 5%;
   height: 2em;

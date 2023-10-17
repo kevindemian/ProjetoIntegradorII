@@ -108,6 +108,10 @@ $(document).ready(function () {
   $('#btn_logout').click(function () {
     let resposta = confirm('Deseja deslogar do sistema?');
     if (resposta == true) {
+      document.getElementById('form_pesquisa').reset();
+      document.getElementById('cadastro_prod').reset();
+      document.getElementById('cadastroSaidProd').reset();
+
       window.location = 'http://localhost:8080/logout';
     }
   });
@@ -228,6 +232,14 @@ $(document).ready(function () {
     let produto;
     let idFornecedor = $('#fornecedor').val();
     let idProduto = $('#inp_id_produto_entrada').val();
+    let nomeProduto = $('#inp_nome_entrada').val();
+
+    if (nomeProduto === null || nomeProduto === '') {
+      alert(
+        'Produto não encontrado ou problema no cadastro. Atualize a página e tente novamente!'
+      );
+      return;
+    }
 
     function getProdutoById(idProduto) {
       $.ajax({
@@ -249,6 +261,11 @@ $(document).ready(function () {
     getProdutoById(idProduto);
 
     let preco = $('#inPrecoEntrada').val().replace(',', '.');
+
+    if (preco <= 0) {
+      alert('Por favor, informe o preço de compra do pruduto!');
+      return;
+    }
     let quantidade = $('#inQtdEntrada').val();
 
     if (quantidade === '' || quantidade === 0) {
@@ -308,6 +325,24 @@ $(document).ready(function () {
 
   /*VALIDAÇÕES-------------------------------------------------------------*/
 
+  //Validação formulário de entrada de produtos
+  //validação código do produto
+  $('#inp_id_produto_entrada').change(function () {
+    let inputB = document.getElementById('inp_id_produto_entrada');
+    inputB.setCustomValidity('');
+  });
+  let inputB = document.getElementById('inp_id_produto_entrada');
+  inputB.oninvalid = function (event) {
+    event.target.setCustomValidity(
+      'Informe o código de um produto já registrado no sistema'
+    );
+  };
+  //validação quantidade de produto
+  $('#inQtdEntrada').change(function () {
+    let inputZ = document.getElementById('inQtdEntrada');
+    inputZ.setCustomValidity('');
+  });
+
   let inputZ = document.getElementById('inQtdEntrada');
   inputZ.oninvalid = function (event) {
     event.target.setCustomValidity(
@@ -315,10 +350,42 @@ $(document).ready(function () {
     );
   };
 
+  //validação preço
+  $('#inPrecoEntrada').change(function () {
+    let inputA = document.getElementById('inPrecoEntrada');
+    inputA.setCustomValidity('');
+  });
   let inputA = document.getElementById('inPrecoEntrada');
+
   inputA.oninvalid = function (event) {
     event.target.setCustomValidity(
       'O preço informado deve ter o formato XX,XX e ser maior que 0'
+    );
+  };
+
+  /**************************************************/
+
+  /*VALIDAÇÃO FORMULÁRIO DE SAIDA DE PRODUTOS*/
+  //validação código do produto
+  $('#inp_id_produto_saida').change(function () {
+    let inputC = document.getElementById('inp_id_produto_saida');
+    inputC.setCustomValidity('');
+  });
+  let inputC = document.getElementById('inp_id_produto_saida');
+  inputC.oninvalid = function (event) {
+    event.target.setCustomValidity(
+      'Informe o código de um produto já registrado no sistema'
+    );
+  };
+
+  $('#quantidade_produto_venda').change(function () {
+    let inputD = document.getElementById('quantidade_produto_venda');
+    inputD.setCustomValidity('');
+  });
+  let inputD = document.getElementById('quantidade_produto_venda');
+  inputD.oninvalid = function (event) {
+    event.target.setCustomValidity(
+      'Informe a quantidade de produto a ser vendida.'
     );
   };
 });
